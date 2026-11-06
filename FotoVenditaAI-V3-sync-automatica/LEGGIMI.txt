@@ -1,0 +1,18 @@
+FOTOVENDITA AI V3 - SINCRONIZZAZIONE AUTOMATICA
+
+1. Crea un progetto su https://supabase.com e attiva Email/Password in Authentication.
+2. Crea il tuo solo utente in Authentication > Users (o abilita temporaneamente la registrazione email, registra il tuo utente e poi disabilitala).
+3. Apri SQL Editor, incolla ed esegui supabase-schema.sql UNA SOLA VOLTA.
+4. In Project Settings / API copia Project URL e la chiave pubblica (anon o publishable). MAI la service_role key.
+5. Pubblica tutti i file di questa cartella su un hosting HTTPS (es. Netlify, Cloudflare Pages) per avere un indirizzo comune.
+6. Apri lo stesso indirizzo da Mac, iPhone e Android; inserisci URL, chiave pubblica, email e password, poi Accedi e attiva.
+7. Dopo il primo caricamento HTTPS l'app funziona offline grazie al service worker. Le modifiche si sincronizzano quando torni online e apri l'app; prova anche Sincronizza ora.
+
+LIMITI IMPORTANTI:
+- Il progetto non include server o account Supabase preconfigurati: fino alla configurazione la sincronizzazione NON funziona.
+- Le foto sono incluse nel JSON dei prodotti e sono soggette ai limiti di spazio e dimensione di Supabase/localStorage; non è adatto a grandi cataloghi fotografici. Per produzione usare Supabase Storage e IndexedDB.
+- In caso di modifiche simultanee allo stesso prodotto vince la versione con timestamp updated più recente (orologio dispositivo); non è una fusione dei singoli campi.
+- La sync lavora quando la pagina è aperta/riaperta, non garantisce aggiornamenti con app completamente chiusa.
+- Prima della prima sincronizzazione fai un backup JSON su ciascun dispositivo.
+- Non è ancora presente riconoscimento AI, ricerca automatica prezzi o pubblicazione marketplace.
+- Non mettere segreti nel codice; la chiave pubblica non è segreta, ma le policy RLS sono essenziali.
